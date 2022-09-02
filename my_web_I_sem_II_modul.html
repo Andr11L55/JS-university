@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>4r</title>
+    </head>
+    <body>
+        <form name="f1">
+            <br>Введіть N:
+<input type="text" name="N"> <br>
+            <input type="button" value="Cумa N2 + (N + 1)2 + (N + 2)2 + . + (2·N)2 equal:" onclick="go()"><br>
+Результат:
+<p><textarea rows="10" cols="45" name="t2"></textarea></p><br>
+<p><textarea rows="10" cols="45" name="t1"></textarea></p><br>
+        </form >
+        <script>
+        function go(){
+    var n=parseInt(f1.N.value), suma=0;
+    f1.t2.value="Cумa N2 + (N + 1)2 + (N + 2)2 + . + (2·N)2 equal:\n";
+    /*
+    a1=N*N; 1
+    
+    S1=1+4=5
+    a2=(N+1)*(N+1); 4
+    
+    S2=29
+    a3=(n+2)*(n+2);
+    
+    S3=86
+    an=(2*n)*(2*n); 4
+    
+    S4=190.
+    */
+    
+    if (n>0)
+    {
+    for(var i=0; i<=n; i++)
+    {
+    //suma+=(n+i)*(n+i);
+    suma+=Math.pow((n+i),2);
+    }
+    f1.t2.value+=+suma+"\n";
+    }
+    else
+    {
+    f1.t2.value="Не можливо виконати функцію!";
+    }
+    
+    }</script>
+        
+    </body>
+</html>

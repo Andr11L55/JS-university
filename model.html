@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>МОДУЛЬ2</title>
+</head>
+<body class="model-body">
+
+
+<form name="f1">
+  Дано ціле число N (> 1) і дві дійсні точки на числовій осі: А, B (А < B). Відрізок [А, B] розбитий на N рівних відрізків. Вивести H - довжину кожного відрізка, а також значення функції F(X)= 1 - X^3 в точках, що розбивають відрізок [А, B]:F(A),    F(А + H),    F(А + 2·H)    .,    F(B).
+<br>Введіть N:
+<input type="text" name="N"> <br>
+Введіть A:
+<input type="text" name="A"> <br>
+Введіть B:
+<input type="text" name="B"> <br>
+<input type="button" value="Вивести H - довжину кожного відрізка, а також значення функції F(X)= 1 - X^3 в точках, що розбивають відрізок [А, B]:F(A),    F(А + H),    F(А + 2·H)    .,    F(B). " onclick="go()"><br>
+Результат:
+<p><textarea rows="10" cols="45" name="t2"></textarea></p><br>
+<p><textarea rows="10" cols="45" name="t1"></textarea></p><br>
+</form>
+<script>
+function go(){
+var a=parseInt(f1.A.value),  b=parseInt(f1.B.value),  N=parseInt(f1.N.value);
+ if (a<b){
+ var H=(b-a)/N;
+  f1.t2.value+="H="+H+"\n";
+}
+else{
+  f1.t2.value="H та ф-ї F(X) не існує";
+
+}
+ if (a<b){
+   var F=0;
+   var h=H;
+  for(x=a; x<=b; x+=h){
+   // if((b-a)%h==0){
+      Fa=1-Math.pow(x,3);
+     // Fah=Fa;
+      f1.t1.value+="F("+x+")="+Fa+"\n";   //break;
+    //}
+    
+  
+    
+  }
+}
+//*/
+
+
+
+
+
+}
+
+</script>
+
+
+</body>
+</html>

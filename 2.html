@@ -1,0 +1,38 @@
+<!-- 219. 
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Форма javascript </title>
+</head>
+<body>
+
+<form name="f1">
+Введіть P
+<input type="text" name="P"> <br>
+Введіть початковий внесок:
+<input type="text" name="V"> <br>
+Введіть потрібний обсяг рахунку:
+<input type="text" name="Vc"> <br>
+<input type="button" value="Визначити через скільки місяців і вивести к-сть та розмір внеску S" onclick="go()"><br>
+BANK:
+<p><textarea rows="100" cols="45" name="t1"></textarea></p><br>
+</form>
+<script>
+function go(){
+let P=parseFloat(f1.P.value),V=parseInt(f1.V.value),Vc=parseInt(f1.Vc.value),S,Nm;
+ Nm=0;
+f1.t1.value = "";
+while(V+V*(P/100)<=Vc){
+	V+=V*(P/100) ;
+	Nm++;
+	f1.t1.value+= "місяць "+Nm+", Обсяг рахунку= "+Vc+"\n";
+};
+Nm--;
+ f1.t1.value+= "\n Цільова сума отримана на" +Nm+ "місяць\n";
+ f1.t1.value+= "Стан рахунку:" +Vc;
+
+}
+</script>
+</body>
+</html>

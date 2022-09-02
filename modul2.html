@@ -1,0 +1,68 @@
+<html>
+<body>
+    За допомогою ER діаграми статичних об'єктів та діаграми станів описати клас «Автобаза». 
+    Диспетчер розподіляє заявки на Рейси між Водіями і призначає для цього Автомобіль. 
+    Водій може зробити заявку на ремонт Автомобіля. Здійснити js реалізацію класу із прикладами застосування.
+<script type="text/javascript">
+class AvtoBase{
+    static car = (id,name,stateofcar) => ({id,name,stateofcar});
+    static driver = (id,name,surname,age,totalRepaired) => ({id,name,surname,age,totalRepaired});
+    static cityLand = (id,name,distances) => ({id,name,distances});
+    static repair=(id, driverID, cityRep,detail_s, cost ,payment,repairDate, executeDate,formID) => ({id, driverID, cityRep,detail_s, cost ,payment,repairDate, executeDate,formID})
+    static fix1detail=1000;
+    static repairs= [];
+    static citiesLand = [
+        AvtoBase.cityLand(0,'Київ', [1000,1500] ),
+        AvtoBase.cityLand(1,'Львів', [2000] ),
+        AvtoBase.cityLand(2,'Харків', [1700] ),
+        ];
+    static drivers = [
+        AvtoBase.driver(0, "Mike", "John", 27, 1000)
+    ];
+    InsertRepair(driverID, cityRepID,detail_s){
+        let ol= AvtoBase.repairs.length;
+        console.log("ol=",ol);
+        let id=0;
+        if (ol > 0 ) {
+            id=repairs[ol-1].id+1;
+        };
+        let rID = cityRepID;
+        let cost =detail_s*AvtoBase.fix1detail ;
+        let payment = false;
+
+        let repairDate= new Date();
+        
+        let executeDate = null;
+        let formID = null;
+        AvtoBase.repairs.push(AvtoBase.repair(id,driverID,rID,detail_s,cost,payment,repairDate,executeDate,formID));
+    }
+    //Підтвердження оплати
+    RepairPayment(repairID){
+        AvtoBase.repairs[repairID].payment=true;
+        console.log("Підтвердження оплати:");
+        console.log(AvtoBase.repairs[repairID]);
+    }
+    //Внесення замовлення у журнал
+    RepairSending(repairID,formID){
+        AvtoBase.repairs[repairID].executeDate=new Date();
+        AvtoBase.repairs[repairID].formID=formID;
+        console.log("Підтвердження запису:");
+        console.log(AvtoBase.repairs[repairID]);
+    }
+
+    /*
+
+*/
+};
+
+let AB = new AvtoBase();
+let repair0 = AB.InsertRepair(0,0,5);
+// Перелік замовлень
+console.log("repairs:",AvtoBase.repairs);
+AB.RepairPayment(0);
+setTimeout(AB.RepairSending, 5000, 0, 1551);
+console.log(AvtoBase.citiesLand);
+
+</script >
+</body >
+</html >

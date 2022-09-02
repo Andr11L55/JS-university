@@ -1,0 +1,93 @@
+<html>
+<body>
+<script type="text/javascript">
+const prise1kg1km=0.002;
+const orders = [];
+const cityAir = (id,name,distances) => ({id,name, distances})
+const user = (id,name,surname,age,totalOrdered) =>
+({id,name,surname,age,totalOrdered})
+
+const citiesAir = [
+ cityAir(0,'Київ', [1000,1500] ),
+ cityAir(1,'Львів', [2000] ),
+ cityAir(2,'Харків', [] ),
+]
+const users = [
+ user(0,'Арнольд', 'Шварцнегер',1955, 1000),
+]
+//class Order {
+// constructor(orders, citiesAir, prise1kg1km, userID, cityaID, citybID, volume) {
+function Order(orders, citiesAir, prise1kg1km, userID, cityaID, citybID,
+volume) {
+ let ol= orders.length;
+if (ol > 0) {
+ this.id=orders[ol-1].id+1;
+ }else{
+this.id=0;
+};
+this.userID = userID;
+let aID = cityaID;
+let bID = citybID;
+let oaID = Math.min(aID,bID);
+let obID = Math.max(aID,bID);
+this.cityaID = oaID;
+this.citybID = obID;
+let dist=0;
+if (oaID!=obID) {
+dist=citiesAir[oaID].distances[obID-oaID-1];
+console.log("dist=",dist);
+};
+this.volume = volume;
+console.log("dist2=",dist);
+console.log("volume=",volume);
+console.log("prise1kg1km=",prise1kg1km);
+
+this.sum = dist*volume*prise1kg1km;
+this.payment = false;
+// if (typeof this.orderDate == "undefined" || this.orderDate === null) {
+// this.orderDate= new Date();
+// }
+this.orderDate= new Date();
+this.executeDate = null;
+this.containerID = null;
+//return {Rid,RaID,RbID,Rvolume,Rsum,Rpayment,RorderDate,RexecuteDate,RcontainerID}
+//}
+};
+console.log("city:",citiesAir);
+// формування замовлення
+order0= new Order(orders, citiesAir, prise1kg1km, 0,0,1,10);
+orders.push(order0);
+console.log("order0:",order0);
+// Перелік замовлень
+console.log("orders:",orders);
+//Підтвердження оплати
+function OrderPayment(orders, orderID){
+orders[orderID].payment=true;
+console.log("Підтвердження оплати:");
+console.log(orders[orderID]);
+}
+//setTimeout(OrderPayment, 10000, orders, 0);
+OrderPayment(orders, 0);
+//for (i=0;i++<10000;){};
+//Відправлення замовлення
+function OrderSending(orders, orderID,containerID){
+orders[orderID].executeDate=new Date();
+orders[orderID].containerID=containerID;
+console.log("Підтвердження відправлення:");
+console.log(orders[orderID]);
+}
+setTimeout(OrderSending, 2000, orders, 0,1001);
+//OrderSending(orders, 0,1001);
+newCity3 = cityAir(3,'Одеса', [1200,600, 800] );
+function InsertAirCity(citiesAir,newCity){
+l=newCity.distances.length;
+for(let i=0;i<l;i++) {
+citiesAir[i].distances.push(newCity.distances[i]);
+};
+citiesAir.push(cityAir(newCity.id,newCity.name,[]));
+};
+InsertAirCity(citiesAir,newCity3);
+console.log(citiesAir);
+</script >
+</body >
+</html >

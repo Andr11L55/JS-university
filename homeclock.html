@@ -1,0 +1,89 @@
+<!-- 15_HomeLibrary.html -->
+<html>
+<body>
+    За допомогою ER діаграми статичних об'єктів та діаграми станів описати клас для представлення часу.
+     Передбачити можливості установки часу і зміни його окремих полів (година, хвилина, секунда)
+      з перевіркою допустимості введених значень.  Створити методи зміни часу на задану кількість хвилин .
+       Здійснити js реалізацію класу із прикладами застосування.
+<script type="text/javascript">
+class HomeClock{
+static time = (id,hour,minute,second) => ({id,hour,minute,second});
+
+static times = [
+ HomeClock.time(0,"10","30","54"),
+
+];
+
+InsertTime(hour,minute,second) {
+ let bn= HomeClock.times.length;
+console.log("обсяг0=",bn);
+let id=0;
+if (bn > 0 ) {
+ id=HomeClock.times[bn-1].id+1;
+ };
+ if(hour<24 && minute<60 && second<60){
+ HomeClock.times.push(HomeClock.time(id,hour,minute,second));
+ console.log("Встановлення часу на годиннику...");
+ 
+ console.log("На даний час годинник вказує на " ,hour, ":" ,minute, ":",second,".");
+/*console.log(HomeClock.times[id]);
+
+if (id != bn-1){
+HomeClock.times[id].hour=HomeClock.times[bn-1].hour;
+HomeClock.times[id].minute=HomeClock.times[bn-1].minute;
+HomeClock.times[id].second=HomeClock.times[bn-1].second;
+};
+HomeClock.times.pop();
+*/
+ }
+ 
+ else{
+    console.log("Не коректно введена година!!!");
+ }
+}
+
+ChangeTime(hour,minute,second,minutes) {
+    let bn= HomeClock.times.length;
+
+console.log("обсяг0=",bn);
+let id=0;
+if (bn > 0 ) {
+ id=HomeClock.times[bn-1].id+1;
+ };
+
+    
+    minute=Number(minute);
+    
+    minute=minute+minutes;
+  
+if(hour<24 && minute<60 && second<60){
+    //Number(str)
+ HomeClock.times.push(HomeClock.time(id,hour,minute,second));
+ console.log("Змінна часу на годиннику...");
+ 
+ console.log("На даний час годинник вказує на " ,hour, ":" ,minute, ":",second,".");
+
+ }
+ 
+ else{
+    console.log("Змінна часу не відбулась на годиннику!");
+ }
+ 
+}
+
+
+//setTimeout(AB.RepairSending, 5000, 0, 1551); 
+//new Date();
+
+};
+let Clock = new HomeClock();
+
+Clock.InsertTime("14","06","43");
+console.log("Час: ", HomeClock.times );
+Clock.InsertTime("24","43","60");
+Clock.ChangeTime("03","36","02",4);
+Clock.ChangeTime("03","36","02",40);
+console.log("Час: ", HomeClock.times );
+</script >
+</body >
+</html >

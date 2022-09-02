@@ -1,0 +1,67 @@
+<!-- 15_HomeLibrary.html -->
+<html>
+<body>
+<script type="text/javascript">
+class HomeLibrary{
+static book = (id,name,surname,title,year) => ({id,name,surname,title,year});
+
+static books = [
+ HomeLibrary.book(0,'Ліна', 'Костенко','Маруся Чурай', '1980' ),
+ HomeLibrary.book(1,'Ліна', 'Костенко','Берестечко', '1999' ),
+ HomeLibrary.book(2,'Ліна', 'Костенко','Записки українського самашедшого', '2010' ),
+HomeLibrary.book(3,'Ернест', 'Хемінгуєй','Прощавай зброє', '1950' ),
+ HomeLibrary.book(4,'Ернест', 'Хемінгуєй','І сходить сонце', '1960' ),
+];
+
+
+FindBook(search){
+ console.log("пошук: ", search);
+let result = HomeLibrary.books.filter((book)=>{
+let r1 = book.title.indexOf(search) > -1 ;
+let r2 = book.surname.indexOf(search) > -1;
+let r3 = book.year.indexOf(search) > -1;
+return r1 || r2 || r3;
+ }) ;
+ console.log("знайдено: ", result );
+
+}
+InsertBook( name,surname,title,year) {
+ let bn= HomeLibrary.books.length;
+console.log("обсяг0=",bn);
+let id=0;
+if (bn > 0 ) {
+ id=HomeLibrary.books[bn-1].id+1;
+ };
+HomeLibrary.books.push(HomeLibrary.book(id,name,surname,title,year));
+}
+DeleteBook(id) {
+ let bn= HomeLibrary.books.length;
+console.log(HomeLibrary.books[id]);
+let DelProof = confirm("Ви хочете видалити вказаний елемент?")
+ if (DelProof) {
+if (id != bn-1){
+HomeLibrary.books[id].name=HomeLibrary.books[bn-1].name;
+HomeLibrary.books[id].surname=HomeLibrary.books[bn-1].surname;
+HomeLibrary.books[id].title=HomeLibrary.books[bn-1].title;
+HomeLibrary.books[id].year=HomeLibrary.books[bn-1].year;
+};
+HomeLibrary.books.pop();
+}
+}
+};
+let Lib = new HomeLibrary();
+Lib.FindBook('Бер');
+Lib.FindBook('2010');
+Lib.FindBook('Кост');
+Lib.FindBook('Хем');
+Lib.InsertBook('Ернест','Хемінгуей','Острови в океані', '1966');
+Lib.InsertBook('Квентін','Тарантіно','Одного разу в Голлівуді', '2019');
+Lib.InsertBook('Юлій','Цезар','Гальська війна', '2014');
+console.log("Всі книги: ", HomeLibrary.books );
+Lib.DeleteBook(6);
+console.log("Всі книги після видалення Квентін: ", HomeLibrary.books );
+Lib.DeleteBook(6);
+console.log("Всі книги після видалення Юлій: ", HomeLibrary.books );
+</script >
+</body >
+</html >

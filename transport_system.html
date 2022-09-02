@@ -1,0 +1,93 @@
+<!-- 14_Tansport_system.html -->
+<html>
+<body>
+<script type="text/javascript">
+/*
+class Square extends Polygon {
+ constructor() {
+ super();
+ }
+}
+let newInstance = new Square();
+*/
+class TransAir{
+static cityAir = (id,name,distances) => ({id,name, distances});
+ static user = (id,name,surname,age,totalOrdered) =>
+({id,name,surname,age,totalOrdered});
+ static order =
+(id,userID,cityaID,citybID,volume,sum,payment,orderDate,executeDate,containerID) => ({id,userID,cityaID,citybID,volume,sum,payment,orderDate,executeDate,containerID
+});
+static prise1kg1km = 0.002;
+//static orders = [order("","","","","","","","","","")];
+static orders = [];
+static citiesAir = [
+ TransAir.cityAir(0,'Київ', [1000,1500] ),
+ TransAir.cityAir(1,'Львів', [2000] ),
+ TransAir.cityAir(2,'Харків', [] ),
+];
+static users = [
+ TransAir.user(0,'Арнольд', 'Шварцнегер',1955, 1000),
+];
+InsertOrder( userID, cityaID, citybID, volume) {
+ let ol= TransAir.orders.length;
+// let oID= TransAir.orders[0].id;
+console.log("ol=",ol);
+// if (ol > 0 || oID == "") {
+let id=0;
+if (ol > 0 ) {
+ id=orders[ol-1].id+1;
+ };
+//this.userID = userID;
+let aID = cityaID;
+let bID = citybID;
+let oaID = Math.min(aID,bID);
+let obID = Math.max(aID,bID);
+//this.cityaID = oaID;
+//this.citybID = obID;
+let dist=0;
+if (oaID!=obID) {
+dist=TransAir.citiesAir[oaID].distances[obID-oaID-1];
+};
+//this.volume = volume;
+let sum = dist*volume*TransAir.prise1kg1km;
+ let payment = false;
+let orderDate= new Date();
+let executeDate = null;
+let containerID = null;
+TransAir.orders.push(TransAir.order(id,userID,oaID,obID,volume,sum,payment,orderDate,executeDate,containerID));
+}
+//Підтвердження оплати
+OrderPayment(orderID){
+TransAir.orders[orderID].payment=true;
+console.log("Підтвердження оплати:");
+console.log(TransAir.orders[orderID]);
+}
+//Відправлення замовлення
+OrderSending(orderID,containerID){
+TransAir.orders[orderID].executeDate=new Date();
+TransAir.orders[orderID].containerID=containerID;
+console.log("Підтвердження відправлення:");
+console.log(TransAir.orders[orderID]);
+}
+InsertAirCity(newCity){
+let l=newCity.distances.length;
+for(let i=0;i<l;i++) {
+TransAir.citiesAir[i].distances.push(newCity.distances[i]);
+};
+TransAir.citiesAir.push(TransAir.cityAir(newCity.id,newCity.name,[]));
+}
+};
+let TA = new TransAir();
+order0 = TA.InsertOrder( 0,0,1,10);
+// Перелік замовлень
+console.log("orders:",TransAir.orders);
+//Підтвердження оплати
+TA.OrderPayment(0);
+setTimeout(TA.OrderSending, 2000, 0,1001);
+//OrderSending(orders, 0,1001);
+newCity3 = TransAir.cityAir(3,'Одеса', [1200,600, 800] );
+TA.InsertAirCity(newCity3);
+console.log(TransAir.citiesAir);
+</script >
+</body >
+</html >

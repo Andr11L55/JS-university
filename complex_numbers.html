@@ -1,0 +1,122 @@
+<!-- 17_ComplexNumber.html -->
+<html>
+<body>
+<script type="text/javascript">
+class ComplexNumb{
+static complex = (id,name,a,b,r,phi) => ({id,name,a,b,r,phi});
+static compNumbers = [];
+setComplex(name, a,b){
+ let n = ComplexNumb.compNumbers.length;
+ console.log("обсяг0=",n);
+ let id=0;
+ if (n > 0 ) {
+ id=ComplexNumb.compNumbers[n-1].id+1;
+};
+let r = Math.sqrt(a*a+b*b);
+let phi=Math.PI*0.5;
+if (a!=0){
+phi=Math.atan(b/a);
+}
+ComplexNumb.compNumbers.push(ComplexNumb.complex(id,name,a,b,r,phi));
+}
+
+setComplexT(name, r,phi){
+let n = ComplexNumb.compNumbers.length;
+ console.log("обсяг0=",n);
+ let id=0;
+ if (n > 0 ) {
+ id=ComplexNumb.compNumbers[n-1].id+1;
+};
+let a =r*Math.cos(phi);
+let b=r*Math.sin(phi);
+
+ComplexNumb.compNumbers.push(ComplexNumb.complex(id,name,a,b,r,phi));
+}
+
+ComplexProduct(name, z0ID, z1ID){
+let z0 = ComplexNumb.compNumbers[z0ID];
+let z1 = ComplexNumb.compNumbers[z1ID];
+let n = ComplexNumb.compNumbers.length;
+ console.log("обсяг0=",n);
+ let id=0;
+ if (n > 0 ) {
+ id=ComplexNumb.compNumbers[n-1].id+1;
+};
+let r = z0.r*z1.r;
+let phi = z0.phi+z1.phi;
+phi=(phi>2*Math.PI)?phi-2*Math.PI:phi;
+//if(phi>2*Math.PI)
+let a =r*Math.cos(phi);
+let b=r*Math.sin(phi);
+
+
+ComplexNumb.compNumbers.push(ComplexNumb.complex(id,name,a,b,r,phi));
+}
+
+ComplexPower(name, z0ID, nPow){
+let z0 = ComplexNumb.compNumbers[z0ID];
+let n = ComplexNumb.compNumbers.length;
+ console.log("обсяг0=",n);
+ let id=0;
+ if (n > 0 ) {
+ id=ComplexNumb.compNumbers[n-1].id+1;
+};
+let r = Math.pow(z0.r,nPow);
+let phi = z0.phi*nPow;
+while(phi>2*Math.PI){
+	phi-=2*Math.PI;
+	};
+//if(phi>2*Math.PI)
+let a =r*Math.cos(phi);
+let b=r*Math.sin(phi);
+ComplexNumb.compNumbers.push(ComplexNumb.complex(id,name,a,b,r,phi));
+}
+
+ComplexRoot(name, z0ID, nPow){
+let z0 = ComplexNumb.compNumbers[z0ID];
+let n = ComplexNumb.compNumbers.length;
+ console.log("обсяг0=",n);
+ let id=0;
+ if (n > 0 ) {
+ id=ComplexNumb.compNumbers[n-1].id+1;
+};
+let r = Math.pow(z0.r,1/nPow);
+let phi = 0;
+let a=0;
+let b=0;
+let p= Math.PI;
+for(let i=0;i<nPow;i++){
+	phi=(z0.phi+2*p*i)/nPow;
+	a =r*Math.cos(phi);
+	b=r*Math.sin(phi);
+	ComplexNumb.compNumbers.push(ComplexNumb.complex(id+(i+1),name+'_'+i,a,b,r,phi));
+};
+
+}
+
+};
+let Com = new ComplexNumb();
+Com.setComplex('Z0',1,1);
+console.log("Додано Z0:");
+console.log(ComplexNumb.compNumbers);
+
+Com.setComplex('Z1',0,1);
+console.log("Додано Z1:");
+
+
+Com.setComplexT("Z2",1,Math.PI);
+console.log("Додано Z2:");
+
+
+Com.ComplexProduct('z1*z2', 1, 2);
+console.log("Z1*Z2:");
+
+Com.ComplexPower('Z1^2',1,2);
+Com.ComplexPower('Z1^3',1,3);
+Com.ComplexPower('Z1^10',1,10);
+
+Com.ComplexRoot('Z1^0.5',1,2);
+Com.ComplexRoot('Z1^1/4',1,4);
+</script >
+</body >
+</html >

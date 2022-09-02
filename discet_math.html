@@ -1,0 +1,76 @@
+<!-- 219. 
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Форма javascript </title>
+</head>
+<body>
+Algoritm Evklida A and B:
+<form name="f1">
+Введіть A
+<input type="text" name="A"> <br>
+Введіть B
+<input type="text" name="B"> <br>
+Введіть N
+<input type="text" name="N"> <br>
+<input type="button" value="Complete:"
+onclick="go()"><br><br>
+Complination:
+<p><textarea rows="100" cols="45" name="t1"></textarea></p><br>
+</form>
+<script>
+function go(){
+var A=parseInt(f1.A.value),B=parseInt(f1.B.value),Ai,Aj;
+f1.t1.value ="A= "+A+"\n";
+f1.t1.value +="B= "+B+"\n";
+
+//1-й спосіб
+var NSD = function(A, B) {  
+   if (!B) {  
+       return A;  
+   }  
+
+   return NSD(B, A % B);  
+};  
+f1.t1.value+="NSD(A,B)="+(NSD(A, B))+"\n";
+//2-й спосіб
+var delitel = 0, p, r;
+    if (A < B){
+     p=B; B=A; A=p;
+     } 
+     do { 
+        if (A%B==0){
+            delitel=B;
+            } 
+        else {
+            r=B;
+            B=A%B;   
+            A=r;    
+            delitel = B; 
+           }
+        } 
+        while (A%B!=0);
+        if (delitel!=0) { 
+            f1.t1.value+="Наибольшим общим делителем чисел " +A+ " и " +B+ " является число: " + delitel;
+            }
+        else {
+          f1.t1.value+="Общего делителя нет";
+            }
+//3-й спосіб
+while(A!=0 && B!=0){
+	if (A > B){
+        A = A % B;
+		}
+    else{
+        B = B % A;
+		}
+	f1.t1.value+="\nNSD(A,B)="+(NSD(A, B))+"\n";			
+}
+
+
+}
+
+</script>
+</body>
+</html>
